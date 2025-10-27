@@ -1,0 +1,37 @@
+name: QA Automation Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  qa-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js for Playwright
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run UI Tests (Playwright)
+        run: npx playwright test --reporter=list
+
+      - name: Run API Tests (Python)
+        run: python src/tests/api/test_generateSummary.py
+
+      - name: Upload Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-reports
+          path: reports/
+
+      - name: Notify (Optional)
+        run: echo "✅ QA Pipeline completed successfully!"
