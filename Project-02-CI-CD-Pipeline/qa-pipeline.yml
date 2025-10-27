@@ -33,5 +33,5 @@ jobs:
           name: qa-reports
           path: reports/
 
-      - name: Notify (Optional)
-        run: echo "✅ QA Pipeline completed successfully!"
+      - name: Notify
+        run: echo "QA Pipeline completed successfully!"
