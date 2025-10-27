@@ -1,0 +1,11 @@
+{
+  "name": "sample-qa-framework",
+  "version": "1.0.0",
+  "scripts": {
+    "test:ui": "npx playwright test src/tests/ui",
+    "test:api": "python src/tests/api/test_generateSummary.py"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}
